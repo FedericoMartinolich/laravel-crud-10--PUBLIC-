@@ -58,14 +58,11 @@ class AssistController extends Controller
             'dni' => 'required',
         ]);
 
-        // Buscar el estudiante por el DNI usando Eloquent
         $student = Student::where('dni', $data['dni'])->with('assists')->first();
 
         if ($student) {
-            // Redirige a la ruta 'students.show' pasando el estudiante encontrado
             return redirect()->route('students.show', $student->id);
         } else {
-            // Si el estudiante no se encuentra, redirige con un mensaje de error
             return redirect()->back()->withErrors('Error: The student was not found');
         }
     }

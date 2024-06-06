@@ -14,10 +14,8 @@ Asegúrese de haber configurado el entorno correctamente. Necesitará un mínimo
 3. Vaya al directorio raíz del proyecto usando la ventana de terminal/símbolo del sistema
 4. Ejecute `composer install`
 5. Configure la clave de la aplicación ejecutando `php artisan key:generate --ansi`
-6. Ejecute `composer require maatwebsite/excel`
-7. Ejecute `composer require barryvdh/laravel-dompdf`
-8. Ejecute `npm install`
-9. Ejecutar migraciones `php artisan migrate`
-10. Ejecutar gestor de paquetes `npm run dev`
-11. Inicie el servidor local ejecutando `php artisan serve`
-12. Visite aquí [http://127.0.0.1:8000/students](http://127.0.0.1:8000/students) para probar la aplicación
+6. Ejecute `npm install`
+7. Ejecutar migraciones `php artisan migrate`
+8. Ejecutar gestor de paquetes `npm run dev`
+9. Inicie el servidor local ejecutando `php artisan serve`
+10. Visite aquí [http://127.0.0.1:8000/students](http://127.0.0.1:8000/students) para probar la aplicación

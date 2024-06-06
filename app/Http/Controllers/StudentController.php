@@ -49,14 +49,6 @@ class StudentController extends Controller
 
     public function store(StoreStudentRequest $request) : RedirectResponse
     {
-        LogCrud::create([
-            'user_id' => auth()->user()->id,
-            'action' => 'store',
-            'ip' => $request->ip(),
-            'browser' => $request->header('User-Agent'),
-            'date' => now(),
-        ]);
-
         $data = $request->except('_token');
 
         $birth = $request->input("birth");
@@ -70,7 +62,6 @@ class StudentController extends Controller
             try {
                 Student::create($data);
         
-                // Crear el registro en LogCrud solo si el estudiante se crea exitosamente
                 LogCrud::create([
                     'user_id' => auth()->user()->id,
                     'action' => 'store',
@@ -88,7 +79,7 @@ class StudentController extends Controller
 
     public function show(Student $student) : View
     {
-        $student->load('assists'); // Carga la relación 'assists' para el estudiante
+        $student->load('assists');
 
         $userId = auth()->id();
         $parameters = Parameter::where('user_id', $userId)->first();
@@ -213,10 +204,8 @@ class StudentController extends Controller
         } else {
 
             try {
-                // Intentar actualizar el estudiante
                 $student->update($data);
         
-                // Crear el registro en LogCrud solo si la actualización fue exitosa
                 LogCrud::create([
                     'user_id' => auth()->user()->id,
                     'action' => 'update',
@@ -227,7 +216,6 @@ class StudentController extends Controller
         
                 return redirect()->back()->withSuccess('Student is updated successfully.');
             } catch (\Exception $e) {
-                // Si ocurre algún error en la actualización, redirigir con mensaje de error
                 return redirect()->back()->withInput()->withErrors(['update' => 'An error occurred while updating the student.']);
             }
         }
